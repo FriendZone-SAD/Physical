@@ -119,14 +119,12 @@ int main() {
                 char* currentHint = getHint(answers[index], hint, revealed);
                 hintCount++;
                 tmpscore -= 15;
-
                 if(hintCount != 5){
                     printf("\nYou can use 5 Hints, Now you use %d out of 5 and your score will be decrease by 10pt.\n",hintCount);
                 }
                 else{
                     printf("\n       ANSWER NOW !!!       \n");
                 }
-                
                 printf("_________________________________\n");
                 printf("\nHint: %s\n", currentHint);
                 printf("_________________________________\n\n");
@@ -169,7 +167,6 @@ char* getHint(char* answer, char* hint, bool* revealed) {
     do {
         r = rand() % len;
     } while(revealed[r] || answer[r] == ' '); 
-
     hint[r] = answer[r];
     revealed[r] = true;
 
