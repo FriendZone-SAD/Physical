@@ -1,0 +1,20 @@
+body {
+  display: flex;
+  background-color: black;
+}
+
+.text {
+  border: 5px solid;
+  margin: auto;
+  width: auto;
+  margin-left: 10%;
+  padding: 10px;
+  color: white;
+}
+
+.video {
+  border: 5px solid;
+  margin: auto;
+  padding: 10px;
+  color: white;
+}
