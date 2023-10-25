@@ -1,9 +1,17 @@
 body {
+  background-image: url('/images/background.jpg');
+  background-size: cover;
+  /* ให้รูปภาพครอบคลุมทั้งหน้าเว็บ */
+  background-repeat: no-repeat;
+  /* ไม่ทำซ้ำรูปภาพ */
+  background-position: center;
+  /* จัดตำแหน่งรูปภาพให้อยู่กึ่งกลาง */
   display: flex;
   background-color: black;
   height: 100vh;
   margin: 0;
-  flex-direction: column; /* Stack child elements vertically */
+  flex-direction: column;
+  /* Stack child elements vertically */
 }
 
 .scroll {
@@ -14,7 +22,8 @@ body {
   flex: 1;
   display: flex;
   color: white;
-  justify-content: center; /* จัดให้เนื้อหาอยู่กึ่งกลางแนวนอน */
+  justify-content: center;
+  /* จัดให้เนื้อหาอยู่กึ่งกลางแนวนอน */
 }
 
 .text {
@@ -40,8 +49,9 @@ body {
   font-size: 45px;
   line-height: 1.1;
   padding: 20px 5px;
-  color: white;; 
-  left: 50%; 
+  color: white;
+  ;
+  left: 50%;
 }
 
 .download button {
@@ -51,9 +61,11 @@ body {
   background-color: black;
   color: white;
 }
+
 .description {
   color: white;
   text-align: left;
 
-  padding-top: 10rem; /* เพิ่ม padding ตามต้องการ */
+  padding-top: 10rem;
+  /* เพิ่ม padding ตามต้องการ */
 }
