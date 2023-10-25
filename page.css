@@ -7,16 +7,14 @@ body {
 }
 
 .scroll {
-  flex: 1; /* Grow and take up available space */
-  display: flex;
-  flex-direction: column; /* Stack child elements vertically */
-  position: relative; /* Create a positioning context for absolute positioning */
+  flex-direction: column;
 }
 
 .content {
-  flex: 1; /* Grow and take up available space */
+  flex: 1;
   display: flex;
   color: white;
+  justify-content: center; /* จัดให้เนื้อหาอยู่กึ่งกลางแนวนอน */
 }
 
 .text {
@@ -40,12 +38,10 @@ body {
 .download {
   text-align: center;
   font-size: 45px;
-  line-height: 25px;
-  padding: 200px 5px;
-  color: white;
-  position: absolute;
-  bottom: -70%;
-  left: 22%;
+  line-height: 1.1;
+  padding: 20px 5px;
+  color: white;; 
+  left: 50%; 
 }
 
 .download button {
@@ -54,4 +50,10 @@ body {
   border-color: white;
   background-color: black;
   color: white;
+}
+.description {
+  color: white;
+  text-align: left;
+
+  padding-top: 10rem; /* เพิ่ม padding ตามต้องการ */
 }
