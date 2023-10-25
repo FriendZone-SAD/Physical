@@ -4,11 +4,13 @@ body {
 }
 
 .text {
-  border: 5px solid;
+  text-align: center;
+  font-size: 45px;
+  line-height: 25px;
   margin: auto;
   width: auto;
-  margin-left: 10%;
-  padding: 10px;
+  margin-left: 2.5%;
+  padding: 10px 5px;
   color: white;
 }
 
