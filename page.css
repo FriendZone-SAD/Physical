@@ -1,6 +1,22 @@
 body {
   display: flex;
   background-color: black;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column; /* Stack child elements vertically */
+}
+
+.scroll {
+  flex: 1; /* Grow and take up available space */
+  display: flex;
+  flex-direction: column; /* Stack child elements vertically */
+  position: relative; /* Create a positioning context for absolute positioning */
+}
+
+.content {
+  flex: 1; /* Grow and take up available space */
+  display: flex;
+  color: white;
 }
 
 .text {
@@ -18,5 +34,24 @@ body {
   border: 5px solid;
   margin: auto;
   padding: 10px;
+  color: white;
+}
+
+.download {
+  text-align: center;
+  font-size: 45px;
+  line-height: 25px;
+  padding: 200px 5px;
+  color: white;
+  position: absolute;
+  bottom: -70%;
+  left: 22%;
+}
+
+.download button {
+  text-align: center;
+  font-size: 48px;
+  border-color: white;
+  background-color: black;
   color: white;
 }
