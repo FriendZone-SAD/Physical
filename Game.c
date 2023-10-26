@@ -6,8 +6,9 @@
 #include <signal.h>
 #include <unistd.h>
 #include <locale.h>
+#include <ctype.h>
 
-#define TIME_LIMIT 180 
+#define TIME_LIMIT 120
 
 char *questions[] = {
     "Q1: it has two wings and two legs",
@@ -29,8 +30,9 @@ char *questions[] = {
     "Q17: Which planet is known for its beautiful rings?",
     "Q18: Name the hardest substance available on Earth?",
     "Q19: Name the National animal of India?",
-    "Q20: Which animal is known as the ""'Ship of the Desert'"""
-};
+    "Q20: Which animal is known as the "
+    "'Ship of the Desert'"
+    ""};
 
 char *answers[] = {
     "Bird",
@@ -52,126 +54,156 @@ char *answers[] = {
     "Saturn",
     "Diamond",
     "Tiger",
-    "Camel"
-};
+    "Camel"};
 
-char* getHint(char* answer, char* hint, bool* revealed);
+char *getHint(char *answer, char *hint, bool *revealed);
 
-int main() {
+char* toLower(const char* str) {
+    static char temp[100];
+    int i;
+    for (i = 0; str[i]; i++) {
+        temp[i] = tolower((unsigned char)str[i]);
+    }
+    temp[i] = '\0';
+    return temp;
+}
+
+int main()
+{
     setlocale(LC_ALL, "th_TH.UTF-8");
     srand(time(NULL));
     int allQuestions = sizeof(questions) / sizeof(questions[0]);
 
     printf("Welcome to Guess the word !!\n\n");
-    
+
     int wrong = 0;
     int hintCount = 0;
     time_t start_time, end_time;
-    start_time = time(NULL); 
+    start_time = time(NULL);
     int score = 0;
-    
 
-    while (wrong < 5) {
-        
+    while (wrong < 5)
+    {
+
         int index = rand() % allQuestions;
         char hint[100] = {0};
         bool revealed[100] = {false};
         strncpy(hint, answers[index], sizeof(hint) - 1);
-        for (int i = 0; hint[i]; i++) {
-            if (hint[i] != ' ') hint[i] = '_';
+        for (int i = 0; hint[i]; i++)
+        {
+            if (hint[i] != ' ')
+                hint[i] = '_';
         }
 
         char guess[100];
         bool correct = false;
         int tmpscore = 100;
 
-        while (!correct && wrong < 5) {
+        while (!correct && wrong < 5)
+        {
             end_time = time(NULL);
             int time_elapsed = (int)difftime(end_time, start_time);
             int time_remaining = TIME_LIMIT - time_elapsed;
 
             int minutes = time_remaining / 60;
             int seconds = time_remaining % 60;
-            
-            printf("Your score : %dpt.\n\n",score);
+
+            printf("Your score : %d pt.\n\n", score);
             printf("Time remaining: %02d:%02d\n\n", minutes, seconds);
             printf("!!!QUESTIONS!!!\n\n");
             printf("%s\n\n", questions[index]);
-            
-            
 
             printf("Guess the word (Type \"Hint\" for hint): ");
-            
-            fgets(guess, sizeof(guess), stdin);
-            
 
-            end_time = time(NULL); 
-           if (time_remaining <= 0) {
+            fgets(guess, sizeof(guess), stdin);
+
+            end_time = time(NULL);
+            if (time_remaining <= 1)
+            {
                 printf("Sorry, time's up!\n");
                 printf("\nThank you for playing the game.\n");
+                printf("\nYour score %d pt.\n\n", score);
                 return 0;
             }
 
             size_t len = strlen(guess);
-            if (len > 0 && guess[len-1] == '\n') guess[len-1] = '\0';
+            if (len > 0 && guess[len - 1] == '\n')
+                guess[len - 1] = '\0';
 
-            if (strcmp(guess, "Hint") == 0 && hintCount < 5) {
-                char* currentHint = getHint(answers[index], hint, revealed);
+            char lowerGuess[100];
+            strcpy(lowerGuess, toLower(guess));
+
+            if (strcmp(lowerGuess, "hint") == 0 && hintCount < 5)
+            {
+                char *currentHint = getHint(answers[index], hint, revealed);
                 hintCount++;
                 tmpscore -= 15;
 
-                if(hintCount != 5){
-                    printf("\nYou can use 5 Hints, Now you use %d out of 5 and your score will be decrease by 15pt.\n",hintCount);
+                if (hintCount != 5)
+                {
+                    printf("\nYou can use 5 Hints, Now you use %d out of 5 and your score will be decrease by 15pt.\n", hintCount);
                 }
-                else{
+                else
+                {
                     printf("\n       ANSWER NOW !!!       \n");
                 }
-                
+
                 printf("_________________________________\n");
                 printf("\nHint: %s\n", currentHint);
                 printf("_________________________________\n\n");
-                
+
                 continue;
             }
+      
+            char lowerAnswer[100];
+            strcpy(lowerAnswer, toLower(answers[index]));
 
-            if (strcmp(guess, answers[index]) == 0) {
+            if (strcmp(lowerGuess, lowerAnswer) == 0)
+            {
                 printf("\n*********************************\n\n");
                 printf("Congrats! Thats correct.\n\n");
-                printf("Your score +%d.\n\n",tmpscore);
+                printf("Your score +%d.\n\n", tmpscore);
                 score += tmpscore;
                 printf("*********************************\n\n");
                 correct = true;
-                hintCount = 0; 
-                
-            } else {
+                hintCount = 0;
+            }
+            else
+            {
                 wrong++;
                 printf("\n\n\nWrong! You have %d more chance to guess.\n", 5 - wrong);
                 printf("____________________________________________________\n\n");
             }
         }
 
-        if (wrong == 5) {
-            printf("\n!!! You guessed wrong more than 5 times! The game is over. !!!d\n\n");
-            for (int i = 0; i < allQuestions; i++) {
+        if (wrong == 5)
+        {
+            printf("\n!!! You guessed wrong more than 5 times! The game is over. !!!\n\n");
+            for (int i = 0; i < allQuestions; i++)
+            {
                 printf("%s || Answer is: %s\n", questions[i], answers[i]);
+                
             }
             break;
         }
     }
 
-    printf("\nThank you for playing the game.\n");
+    printf("\nThank you for playing the game.\n\n");
+    printf("Your score %d pt.\n\n", score);
     return 0;
 }
 
-char* getHint(char* answer, char* hint, bool* revealed) {
+char *getHint(char *answer, char *hint, bool *revealed)
+{
     int len = strlen(answer);
     int r;
-    do {
+    do
+    {
         r = rand() % len;
-    } while(revealed[r] || answer[r] == ' '); 
+    } while (revealed[r] || answer[r] == ' ');
 
     hint[r] = answer[r];
     revealed[r] = true;
 
     return hint;
-}  
+}
