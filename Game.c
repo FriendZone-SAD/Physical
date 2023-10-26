@@ -121,7 +121,7 @@ int main() {
                 tmpscore -= 15;
 
                 if(hintCount != 5){
-                    printf("\nYou can use 5 Hints, Now you use %d out of 5 and your score will be decrease by 10pt.\n",hintCount);
+                    printf("\nYou can use 5 Hints, Now you use %d out of 5 and your score will be decrease by 15pt.\n",hintCount);
                 }
                 else{
                     printf("\n       ANSWER NOW !!!       \n");
@@ -145,7 +145,7 @@ int main() {
                 
             } else {
                 wrong++;
-                printf("\nWrong! You have %d more chance to guess.\n", 5 - wrong);
+                printf("\n\n\nWrong! You have %d more chance to guess.\n", 5 - wrong);
                 printf("____________________________________________________\n\n");
             }
         }
